@@ -9,36 +9,7 @@
 </head>
 <body>
 
-	ENTRASTE PERROOOO!!!!!!!!!!!!!
-	<!--  
-	<h1>Bienvenido usuario: </h1> <h1>${user.getUserName}</h1>
-	<h2>Aca puedes ver tus registros de transacciones</h2>
-	<div>
-		<table>
-			<thead>
-			<tr>
-				<th>Id transaccion</th>
-				<th>Tipo de transaccion</th>
-				<th>Fecha de transaccion</th>
-				<th>Cantidad de transaccion</th>
-				<th>Concepto de transaccion</th>
-				<th>Usuario de transaccion</th>
-				<th>Cuenta de transaccion</th>
-			</tr>
-			</thead>
-			
-			<c:forEach var="c" items = "${transaction}">
-				<tr>
-					<td>${c.transId}</td>
-					<td>${c.user}</td>
-					<td>${c.transType}</td>
-				</tr>
-			</c:forEach>
-			
-		
-		</table>
-	</div>
+	<h1>ENTRASTE PERROOOO!!!!!!!!!!!!</h1>
 	
-	-->
 </body>
 </html>
