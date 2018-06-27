@@ -9,4 +9,6 @@ import com.uca.capas.domain.Users;;
 
 public interface UsersRepository extends JpaRepository<Users, Integer>{
 	public List<Users> findByUserIdEquals(Integer userId);
+	
+	public Users findByUserName(String userId);
 }

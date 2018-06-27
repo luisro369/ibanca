@@ -10,6 +10,26 @@
 <body>
 
 	<h1>Bienvenido usuario: </h1> <td>${user.userName}</td>
+	<h2>Aca puedes ver tus registros de transacciones</h2>
+	<div>
+		<table>
+			<thead>
+			<tr>
+				<th>Id transaccion</th>
+				<th>Tipo de transaccion</th>
+				<th>Fecha de transaccion</th>
+				<th>Cantidad de transaccion</th>
+				<th>Concepto de transaccion</th>
+				<th>Usuario de transaccion</th>
+				<th>Cuenta de transaccion</th>
+			</tr>
+			</thead>
+			
+			
+			
+		
+		</table>
+	</div>
 	
 </body>
 </html>

@@ -40,13 +40,12 @@ public class MainController {
 	
 	//metodo para login
 	@RequestMapping("/home")
-	public ModelAndView loginValidation(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
+	public ModelAndView loginValidation(@RequestParam(value="username") String userId,@RequestParam(value="password")String userPass) {
 		String userPassVerification = null;
 		String userTypeVerification = null;
 		ModelAndView mav = new ModelAndView();
-		//lista de usuarios 
-		//List<Users> users = usersRepository.findByUserIdEquals(userId);
-		Users users = usersRepository.findOne(userId);
+		//-----------------usuario------------------------
+		Users users = usersRepository.findByUserName(userId);
 		// lista de transacciones segun el usuario
 		//List<Transactions> transactions = transactionsRepository.findByUserIdLike(users.get(0).getUserId());
 		userPassVerification = users.getUserPass();
@@ -55,12 +54,13 @@ public class MainController {
 			mav.setViewName("iBancaHomeAdmin");
 		}
 		if(userPass.equals(userPassVerification) && userTypeVerification.equals("cliente") ) {
+		/*	if(users.getUserName().equals(transactions.getU)) {
+				
+			}//si el usuario es el mismo para transaction y user*/
 			mav.addObject("user",users);
 			//mav.addObject("transaction",transactions);
 			mav.setViewName("iBancaHome");
-		}/*else {
-			mav.setViewName("iBancaLogin");
-		}*/
+		}//si es un usuario
 		return mav;
 	}
 
