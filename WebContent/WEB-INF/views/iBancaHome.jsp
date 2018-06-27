@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<h1>ENTRASTE PERROOOO!!!!!!!!!!!!</h1>
+	<h1>Bienvenido usuario: </h1> <td>${user.userName}</td>
 	
 </body>
 </html>
