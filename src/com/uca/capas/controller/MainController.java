@@ -1,5 +1,6 @@
 package com.uca.capas.controller;
 
+
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -70,6 +71,8 @@ public class MainController {
 		}//try catch para manejar excepciones de la base (no existe el usuario con el id provisto)
 		return mav;
 	}
+	
+	
 	
 	@RequestMapping("/verTodos")
 	public ModelAndView verTodos(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {

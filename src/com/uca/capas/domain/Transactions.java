@@ -2,6 +2,8 @@ package com.uca.capas.domain;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(schema = "ebanca" , name = "transactions")
@@ -40,7 +44,8 @@ public class Transactions {
 	
 	
 	@Column(name = "trans_date")
-	private  Date transDate;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private  Calendar transDate;
 	
 	@Column(name = "trans_amount")
 	private Double transAmount;
@@ -89,11 +94,11 @@ public class Transactions {
 		this.transType = transType;
 	}
 
-	public Date getTransDate() {
+	public Calendar getTransDate() {
 		return transDate;
 	}
 
-	public void setTransDate(Date transDate) {
+	public void setTransDate(Calendar transDate) {
 		this.transDate = transDate;
 	}
 
@@ -128,6 +133,21 @@ public class Transactions {
 	public void setTransAccount(Integer transAccount) {
 		this.transAccount = transAccount;
 	}
+	
+	//Delegate para conversion de fecha
+		public String getFechaDelegate(){
+			if(this.transDate == null){
+				return "";
+			}
+			else{
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				String shortdate = sdf.format(this.transDate.getTime());
+				return shortdate;
+			}
+		}
+	
+	
+	
 	
 	
 
