@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.uca.capas.domain.Transactions;
 import com.uca.capas.domain.Users;
-import com.uca.capas.repositories.TransactionsRepository;
 import com.uca.capas.repositories.UsersRepository;
 
 //import com.uca.capas.domain.Users;
@@ -22,13 +20,8 @@ import com.uca.capas.repositories.UsersRepository;
 
 @Controller
 public class MainController {
-
-	
 	@Autowired
 	private UsersRepository usersRepository;
-	
-	@Autowired
-	private TransactionsRepository transactionsRepository;
 	
 	@RequestMapping("/index")
 	public ModelAndView initMain() {
@@ -37,34 +30,55 @@ public class MainController {
 		mav.setViewName("iBancaLogin");
 		return mav;
 	}
-	
-	//metodo para login
 	@RequestMapping("/home")
-	public ModelAndView loginValidation(@RequestParam(value="username") String userId,@RequestParam(value="password")String userPass) {
+	public ModelAndView loginValidation(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
 		String userPassVerification = null;
 		String userTypeVerification = null;
 		ModelAndView mav = new ModelAndView();
-		//-----------------usuario------------------------
-		Users users = usersRepository.findByUserName(userId);
-		// lista de transacciones segun el usuario
-		//List<Transactions> transactions = transactionsRepository.findByUserIdLike(users.get(0).getUserId());
+		Users users = (Users) usersRepository.findByUserIdEquals(userId);
 		userPassVerification = users.getUserPass();
 		userTypeVerification = users.getUserType();
 		if(userPass.equals(userPassVerification) && userTypeVerification.equals("admin") ) {
+			mav.addObject("logedUserId",userId);
+			mav.addObject("logedUserPass",userPassVerification);
 			mav.setViewName("iBancaHomeAdmin");
 		}
 		if(userPass.equals(userPassVerification) && userTypeVerification.equals("cliente") ) {
-		/*	if(users.getUserName().equals(transactions.getU)) {
-				
-			}//si el usuario es el mismo para transaction y user*/
-			mav.addObject("user",users);
-			//mav.addObject("transaction",transactions);
-			mav.setViewName("iBancaHome");
-		}//si es un usuario
+		mav.addObject("logedUserId",userId);
+		mav.addObject("logedUserPass",userPassVerification);
+		mav.setViewName("iBancaHome");
+
+		}//si es un cliente
 		return mav;
 	}
-
+	@RequestMapping("/verTodos")
+	public ModelAndView verTodos(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
+		ModelAndView mav = new ModelAndView();
+		List<Users> users = usersRepository.findAll();
+		mav.addObject("users", users);
+		mav.addObject("logedUserId",userId);
+		mav.addObject("logedUserPass",userPass);
+		mav.setViewName("iBancaAll");
+		return mav;
+	}
+	@RequestMapping("/editarUsuario")
+	public ModelAndView editUser(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("logedUserId",userId);
+		mav.addObject("logedUserPass",userPass);
+		mav.setViewName("iBancaEditUser");
+		return mav;
+	}
 	
-	
-	
+	/*
+	@RequestMapping("/saveUser")
+	public ModelAndView saveUser() {
+		ModelAndView mav = new ModelAndView();
+		List<Users> users = usersRepository.findByUserIdEquals(2);
+		users.get(0).setUserName("Ricardo Lopez");
+		usersRepository.save(users);
+		mav.setViewName("iBancaEditUser");
+		return mav;
+	}
+	*/
 }
