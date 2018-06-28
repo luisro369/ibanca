@@ -17,8 +17,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(schema = "ebanca", name = "users")
 public class Users {
 	@Id
-	//@GeneratedValue(generator="user_id_user_seq", strategy = GenerationType.AUTO)
-	//@SequenceGenerator(name = "user_id_user_seq", sequenceName = "store.user_id_user_seq")
+	@GeneratedValue(generator="users_user_id_seq", strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "users_user_id_seq", sequenceName = "ebanca.users_user_id_seq")
 	@Column(name = "user_id" , nullable = false)
 	private Integer userId;
 	

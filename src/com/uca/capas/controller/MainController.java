@@ -70,6 +70,7 @@ public class MainController {
 		}//try catch para manejar excepciones de la base (no existe el usuario con el id provisto)
 		return mav;
 	}
+	
 	@RequestMapping("/verTodos")
 	public ModelAndView verTodos(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
 		ModelAndView mav = new ModelAndView();
@@ -81,23 +82,64 @@ public class MainController {
 		return mav;
 	}
 	@RequestMapping("/editarUsuario")
-	public ModelAndView editUser(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
+	public ModelAndView editUser(@RequestParam("userId") Integer userId) {
+		ModelAndView mav = new ModelAndView();
+		Users users = (Users) usersRepository.findByUserIdEquals(userId);
+		mav.addObject("users", users);
+		mav.setViewName("iBancaEditUser");
+
+		return mav;
+	}
+	@RequestMapping("/updateUser")
+	public ModelAndView updateUser(@RequestParam("userId") Integer editUserId,@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass,
+			@RequestParam("editUsername")	String userName,@RequestParam(value="userType") String userType,@RequestParam(value="userState")Boolean userState) {
+		ModelAndView mav = new ModelAndView();
+		Users users = (Users) usersRepository.findByUserIdEquals(editUserId);
+		users.setUserName(userName);
+		users.setUserState(userState);
+		users.setUserType(userType);
+		usersRepository.save(users);
+		mav.addObject("logedUserId",userId);
+		mav.addObject("logedUserPass",userPass);
+		mav.addObject("users", users);
+		mav.setViewName("iBancaEditUser");
+		return mav;
+	}
+	@RequestMapping("/deleteUser")
+	public ModelAndView deleteUser(@RequestParam("userId") Integer deleteUserId,@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
+		ModelAndView mav = new ModelAndView();
+		usersRepository.delete(deleteUserId);
+		List<Users> users = usersRepository.findAll();
+		mav.addObject("users", users);
+		mav.addObject("logedUserId",userId);
+		mav.addObject("logedUserPass",userPass);
+		mav.setViewName("iBancaAll");
+		return mav;
+	}
+	@RequestMapping("/addNewUser")
+	public ModelAndView addNewUser(@RequestParam("addUserName") String addUserName,@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass,
+			@RequestParam("addUserPass")	String addUserPass,@RequestParam(value="addUserType") String addUserType,@RequestParam(value="addUserState")Boolean addUserState,@RequestParam(value="addUserBalance")Double addUserBalance) {
+		ModelAndView mav = new ModelAndView();
+		Users users = new Users();
+		users.setUserName(addUserName);
+		users.setUserPass(addUserPass);
+		users.setUserBalance(addUserBalance);
+		users.setUserType(addUserType);
+		users.setUserState(addUserState);
+		usersRepository.save(users);
+		List<Users> usersList = usersRepository.findAll();
+		mav.addObject("users", usersList);
+		mav.addObject("logedUserId",userId);
+		mav.addObject("logedUserPass",userPass);
+		mav.setViewName("iBancaAll");
+		return mav;
+	}
+	@RequestMapping("/addUser")
+	public ModelAndView addUser(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("logedUserId",userId);
 		mav.addObject("logedUserPass",userPass);
-		mav.setViewName("iBancaEditUser");
+		mav.setViewName("iBancaAddUser");
 		return mav;
 	}
-	
-	/*
-	@RequestMapping("/saveUser")
-	public ModelAndView saveUser() {
-		ModelAndView mav = new ModelAndView();
-		List<Users> users = usersRepository.findByUserIdEquals(2);
-		users.get(0).setUserName("Ricardo Lopez");
-		usersRepository.save(users);
-		mav.setViewName("iBancaEditUser");
-		return mav;
-	}
-	*/
 }

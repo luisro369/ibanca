@@ -11,63 +11,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-<center>iBanca (EDICION DE USUARIOS YA EXISTENTES)</center>
+<center>iBanca (AGREGAR UN NUEVO USUARIO)</center>
 <div class="row" style="margin-left: 20%;">
-    <div class="col-xs-6"><table class="table">
-	<thead class="thead-dark">
-		<tr>
-		<th><center>Informacion actual del usuario</center></th>	
-		
-		</tr>
-		</thead>
-		<tr>
-			<th>Id:</th>
-			<td>${users.userId}</td>
-		</tr>
-		<tr>
-			<th>Nombre:</th>
-			<td>${users.userName}</td>
-		</tr>
-		<tr>
-			<th>Saldo:</th>
-		<td>${users.userBalance}</td>
-		</tr>
-		<tr>
-			<th>Tipo:</th>
-				<td>${users.userType}</td>
-		</tr>
-		<tr>
-			<th>Estado:</th>
-				<td>${users.userState}</td>
-		</tr>
-			
-	</table>
-	</div>
-    <div class="col-xs-3"> <center>
-	<form class="form-group" modelAttribute="user" action="${pageContext.request.contextPath}/updateUser" method="post">
+   <center> <div class="col-xs-3"> 
+	<form class="form-group" modelAttribute="user" action="${pageContext.request.contextPath}/addNewUser" method="post">
   <div class="form-group">
-    <label for="user">Nombre</label>
-    <input type="text"  class="form-control" name="editUsername" id="editUsername" placeholder="insert username here">
+    <label for="user">ingrese su nombre</label>
+    <input type="text"  class="form-control" name="addUserName" id="editUsername" placeholder="insert username here">
   </div>
-
+<div class="form-group">
+    <label for="user">ingrese su contraseña</label>
+    <input type="password"  class="form-control" name="addUserPass" id="editUsername" placeholder="insert username here">
+  </div>
+  <div class="form-group">
+    <label for="user">Monto con el que se apertura la cuenta</label>
+    <input type="text"  class="form-control" name="addUserBalance" id="editUsername" placeholder="insert username here">
+  </div>
   <div class="form-group">
     <label for="pass">Tipo de usuario</label>
-    <input type="text" class="form-control" name="userType" id="userType" placeholder="insert usertype here">
+    <input type="text" class="form-control" name="addUserType" id="userType" placeholder="insert usertype here">
   </div>
-  
    <div class="form-group">
     <label for="pass">Estado de usuario</label>
-    <input type="text" class="form-control" name="userState" id="userState" placeholder="insert userstate here">
+    <input type="text" class="form-control" name="addUserState" id="userState" placeholder="insert userstate here">
   </div>
   </center>
-  	 <input type="hidden" id="userId" name="userId" value="${users.userId}">
   	<input type="hidden" id="username" name="username" value="${logedUserId}">
 	  <input type="hidden" id="password" name="password" value="${logedUserPass}">
   <button type="submit" class="btn btn-default">Guardar</button>
 	</form>
 	
 	</div>
-</div>
 
 </body>
 </html>

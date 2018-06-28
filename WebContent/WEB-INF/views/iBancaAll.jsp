@@ -48,11 +48,15 @@ table{
 				<td>
  <form class="form-inline"  action="${pageContext.request.contextPath}/editarUsuario" method="post">
 	<input type="submit" class="myButton"  value="Editar" /><br><br>
+	 <input type="hidden" id="userId" name="userId" value="${u.userId }">
+
 	 <input type="hidden" id="username" name="username" value="${logedUserId}">
 	  <input type="hidden" id="password" name="password" value="${logedUserPass }">
   </form>
-<form class="form-inline"  action="${pageContext.request.contextPath}/eliminarUsuario" method="post">
+<form class="form-inline"  action="${pageContext.request.contextPath}/deleteUser" method="post">
 	<input type="submit" class="myButton"  value="Elimar" /><br><br>
+		 <input type="hidden" id="userId" name="userId" value="${u.userId }">
+	
 	 <input type="hidden" id="username" name="username" value="${logedUserId}">
 	  <input type="hidden" id="password" name="password" value="${logedUserPass }">
   </form>				

@@ -18,6 +18,12 @@
 	  <input type="hidden" id="password" name="password" value="${logedUserPass}">
   <button type="submit" class="btn btn-default">Ver todos</button>
 </form>
+
+<form class="form-inline"  action="${pageContext.request.contextPath}/addUser" method="post">
+  <input type="hidden" id="username" name="username" value="${logedUserId}">
+	  <input type="hidden" id="password" name="password" value="${logedUserPass}">
+  <button type="submit" class="btn btn-default">Añadir usuario</button>
+</form>
 </center>
 
 </body>
