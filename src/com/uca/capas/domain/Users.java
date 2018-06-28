@@ -19,7 +19,7 @@ public class Users {
 	@Id
 	//@GeneratedValue(generator="user_id_user_seq", strategy = GenerationType.AUTO)
 	//@SequenceGenerator(name = "user_id_user_seq", sequenceName = "store.user_id_user_seq")
-	@Column(name = "user_id")
+	@Column(name = "user_id" , nullable = false)
 	private Integer userId;
 	
 	@NotEmpty(message = "El campo Nombre no puede quedar vacio")
@@ -27,7 +27,7 @@ public class Users {
 	private String userName;
 	
 	@NotEmpty(message = "El campo Apellido no puede quedar vacio")
-	@Column(name = "user_pass")
+	@Column(name = "user_pass" , nullable = false)
 	private String userPass;
 	
 	@NotNull(message = "El campo Fecha no puede quedar vacio")

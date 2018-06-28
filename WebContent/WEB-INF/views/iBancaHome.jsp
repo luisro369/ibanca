@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<input type="submit" class="Button"  value="Regresar" action = "${pageContext.request.contextPath}/iBancaLogin" />
 	<h1>Bienvenido usuario: </h1> <td>${user.userName}</td>
 	<h2>Aca puedes ver tus registros de transacciones</h2>
 	<div>
@@ -20,13 +20,21 @@
 				<th>Fecha de transaccion</th>
 				<th>Cantidad de transaccion</th>
 				<th>Concepto de transaccion</th>
-				<th>Usuario de transaccion</th>
-				<th>Cuenta de transaccion</th>
+				<th>Usuario a transferir</th>
+				<th>Id de usuario a transferir</th>
 			</tr>
 			</thead>
-			
-			
-			
+			<c:forEach var = "t" items = "${transaction}">
+				<tr>
+				<td>${t.transId}</td>
+				<td>${t.transType}</td>
+				<td>${t.transDate}</td>
+				<td>${t.transAmount}</td>
+				<td>${t.transConcept}</td>
+				<td>${t.transUser}</td>
+				<td>${t.transAccount}</td>
+			</tr>
+			</c:forEach>
 		
 		</table>
 	</div>

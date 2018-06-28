@@ -40,7 +40,7 @@ public class Transactions {
 	
 	
 	@Column(name = "trans_date")
-	private  Date transData;
+	private  Date transDate;
 	
 	@Column(name = "trans_amount")
 	private Double transAmount;
@@ -89,12 +89,12 @@ public class Transactions {
 		this.transType = transType;
 	}
 
-	public Date getTransData() {
-		return transData;
+	public Date getTransDate() {
+		return transDate;
 	}
 
-	public void setTransData(Date transData) {
-		this.transData = transData;
+	public void setTransDate(Date transDate) {
+		this.transDate = transDate;
 	}
 
 	public Double getTransAmount() {

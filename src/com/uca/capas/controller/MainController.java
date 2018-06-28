@@ -2,17 +2,22 @@ package com.uca.capas.controller;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 //import java.util.List;
 
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uca.capas.domain.Transactions;
 import com.uca.capas.domain.Users;
+import com.uca.capas.repositories.TransactionsRepository;
 import com.uca.capas.repositories.UsersRepository;
 
 //import com.uca.capas.domain.Users;
@@ -23,6 +28,9 @@ public class MainController {
 	@Autowired
 	private UsersRepository usersRepository;
 	
+	@Autowired
+	private TransactionsRepository transactionsRepository;
+	
 	@RequestMapping("/index")
 	public ModelAndView initMain() {
 		ModelAndView mav = new ModelAndView();
@@ -31,24 +39,35 @@ public class MainController {
 		return mav;
 	}
 	@RequestMapping("/home")
-	public ModelAndView loginValidation(@RequestParam(value="username") Integer userId,@RequestParam(value="password")String userPass) {
+	public ModelAndView loginValidation(@RequestParam(value="username") Integer userId,@RequestParam(value="password", required = true) String userPass) {
 		String userPassVerification = null;
 		String userTypeVerification = null;
 		ModelAndView mav = new ModelAndView();
-		Users users = (Users) usersRepository.findByUserIdEquals(userId);
-		userPassVerification = users.getUserPass();
-		userTypeVerification = users.getUserType();
-		if(userPass.equals(userPassVerification) && userTypeVerification.equals("admin") ) {
-			mav.addObject("logedUserId",userId);
-			mav.addObject("logedUserPass",userPassVerification);
-			mav.setViewName("iBancaHomeAdmin");
-		}
-		if(userPass.equals(userPassVerification) && userTypeVerification.equals("cliente") ) {
-		mav.addObject("logedUserId",userId);
-		mav.addObject("logedUserPass",userPassVerification);
-		mav.setViewName("iBancaHome");
+		//---------encontrando usuarios con el id provisto-----------
+		try {
+			Users users = (Users) usersRepository.findByUserIdEquals(userId);
 
-		}//si es un cliente
+			//---------encontrando transacciones segun usuario-----------
+			List<Transactions> trans = transactionsRepository.findByUserIdEquals(userId) ;
+			//----------extrayendo para poder verificar si es admin o cliente-------------
+			userPassVerification = users.getUserPass();
+			userTypeVerification = users.getUserType();
+			
+			if(userPass.equals(userPassVerification) && userTypeVerification.equals("admin") ) {
+				mav.addObject("logedUserId",userId);
+				mav.addObject("logedUserPass",userPassVerification);
+				mav.setViewName("iBancaHomeAdmin");
+			}//si es administrador
+			
+			if(userPass.equals(userPassVerification) && userTypeVerification.equals("cliente") ) {
+				mav.addObject("user",users);
+				mav.addObject("transaction",trans);
+				mav.setViewName("iBancaHome");
+			}//si es un cliente
+		}
+		catch(Exception e){
+			mav.setViewName("iBancaLogin");
+		}//try catch para manejar excepciones de la base (no existe el usuario con el id provisto)
 		return mav;
 	}
 	@RequestMapping("/verTodos")
