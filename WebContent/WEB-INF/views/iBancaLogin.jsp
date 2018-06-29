@@ -60,14 +60,15 @@
 			var cont = 0;
 			var usr = document.getElementById("username").value;
 			var pass = document.getElementById("password").value;
-			for(i = 0; i < 10 ;i++){
+			for(var i = 0; i < 10 ;i++){
+				alert("${usuarios.get(0).userName}");
 				if((usr == "${usuarios.get(i).userId}") && (pass == "${usuarios.get(i).userPass}")){
 					cont = 0;
 				}
 				else{cont = 1;}
 			}//for
 			if(cont == 0){
-				alert("bienvenido");	
+				alert("bienvenido");
 			}
 			else{
 				alert("usuario o contraseña incorrectos");
