@@ -35,7 +35,8 @@ public class MainController {
 	@RequestMapping("/index")
 	public ModelAndView initMain() {
 		ModelAndView mav = new ModelAndView();
-	//	List<Users> users = usersRepository.findAll();
+		List<Users> users = usersRepository.findAll();
+		mav.addObject("usuarios",users);
 		mav.setViewName("iBancaLogin");
 		return mav;
 	}
