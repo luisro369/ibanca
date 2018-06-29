@@ -11,20 +11,29 @@
 </head>
 <body>
 <div  style="margin-top: 10%;"><center>
- <h1>Bienvenido a eBanca</h1>
- <form class="form-inline"  action="${pageContext.request.contextPath}/home" method="post">
-  <div class="form-group">
-    <label for="user">User</label>
-    <input type="text" class="form-control" name="username" id="username" placeholder="insert username here">
-  </div>
 
-  <div class="form-group">
-    <label for="pass">Password</label>
-    <input type="password" class="form-control" name="password" id="password" placeholder="insert password here">
-  </div>
-  
-  <button type="submit" class="btn btn-default">login</button>
-</form>
+
+	<script type="text/javascript">
+		alert("hola");
+	</script>
+
+	 <h1>Bienvenido a eBanca</h1>
+	 <form class="form-inline"  action="${pageContext.request.contextPath}/home" method="post">
+	  <div class="form-group">
+	    <label for="user">User</label>
+	    <input type="text" class="form-control" name="username" id="username" placeholder="insert username here">
+	  </div>
+	
+	  <div class="form-group">
+	    <label for="pass">Password</label>
+	    <input type="password" class="form-control" name="password" id="password" placeholder="insert password here">
+	  </div>
+	  
+	  <button type="submit" class="btn btn-default">login</button>
+	</form>
+	
+	
+	
 </center>
 </div>
 </body>

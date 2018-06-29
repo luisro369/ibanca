@@ -11,11 +11,6 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    var variable = $( "#datepicker" ).datepicker();
-  } );
-  </script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -24,18 +19,7 @@
 <input type="submit" class="Button"  value="Regresar" onclick="location.href='${pageContext.request.contextPath}/index'"/>
 	<h1>Bienvenido usuario: </h1> <td>${user.userName}</td>
 	<h2>Aca puedes ver tus registros de transacciones</h2>
-	
-	<p>Date: <input type="text" id="datepicker" value = "${dp}"></p>
 
-	
-	<c:choose>
-		<c:when test = "${dp == t.fechaDelegate }">
-			<h1>son iguales perrro</h1>
-		</c:when>
-		<c:otherwise>
-			<h1>Lo sentimos, no hay registro de esa fecha porfavor ingrese otra</h1>
-		</c:otherwise>
-	</c:choose>
 	
 					
 	<div>
